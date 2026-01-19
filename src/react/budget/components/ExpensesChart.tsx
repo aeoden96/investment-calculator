@@ -185,7 +185,7 @@ export function ExpensesChart({ expenses, calculated }: ExpensesChartProps) {
         chartRef.current.destroy();
       }
     };
-  }, [chartType, expenses, calculated]);
+  }, [chartType, expenses, calculated, t]);
   
   return (
     <div>

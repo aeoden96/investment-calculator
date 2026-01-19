@@ -68,7 +68,7 @@ function formatTransportStats(
   perMonth: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
   monthlyAverage: number,
-  t: TFunction
+  _t: TFunction
 ): string {
   const merchantBreakdown = topMerchants
     .map(m => `${m.count} ${m.name}`)
@@ -82,7 +82,7 @@ function formatFoodDeliveryStats(
   average: number,
   perMonth: number,
   maxTransaction: number,
-  t: TFunction
+  _t: TFunction
 ): string {
   const frequency = perMonth >= 4 ? 'every 7-8 days' : perMonth >= 2 ? 'every 2 weeks' : 'occasionally';
   return `${count} orders • €${average.toFixed(2)} avg per order • ~${Math.round(perMonth)}x/month (${frequency}) • Most expensive: €${maxTransaction.toFixed(2)}`;
@@ -93,7 +93,7 @@ function formatFastFoodStats(
   average: number,
   perMonth: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
-  t: TFunction
+  _t: TFunction
 ): string {
   const topThree = topMerchants.slice(0, 3)
     .map(m => `${m.name} (€${Math.round(m.amount)})`)
@@ -107,7 +107,7 @@ function formatGroceriesStats(
   average: number,
   perMonth: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
-  t: TFunction
+  _t: TFunction
 ): string {
   const perWeek = perMonth / 4.33;
   const topStores = topMerchants.slice(0, 3)
@@ -122,7 +122,7 @@ function formatSubscriptionsStats(
   recurring: number,
   monthlyAverage: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
-  t: TFunction
+  _t: TFunction
 ): string {
   const topSubs = topMerchants.slice(0, 3)
     .map(m => `${m.name} (€${(m.amount / m.count).toFixed(2)}/mo)`)
@@ -137,7 +137,7 @@ function formatShoppingStats(
   perMonth: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
   maxTransaction: number,
-  t: TFunction
+  _t: TFunction
 ): string {
   const topSites = topMerchants.slice(0, 3)
     .map(m => m.name)
@@ -152,7 +152,7 @@ function formatGamingStats(
   perMonth: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
   maxTransaction: number,
-  t: TFunction
+  _t: TFunction
 ): string {
   const platforms = topMerchants.slice(0, 2)
     .map(m => m.name)
@@ -165,7 +165,7 @@ function formatBooksStats(
   count: number,
   average: number,
   perMonth: number,
-  t: TFunction
+  _t: TFunction
 ): string {
   return `${count} ebook/book purchases • €${average.toFixed(2)} avg • ~${Math.round(perMonth)}x/month`;
 }
@@ -175,7 +175,7 @@ function formatHealthStats(
   average: number,
   perMonth: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
-  t: TFunction
+  _t: TFunction
 ): string {
   const stores = topMerchants.slice(0, 2)
     .map(m => m.name)
@@ -187,7 +187,7 @@ function formatHealthStats(
 function formatUtilitiesStats(
   count: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
-  t: TFunction
+  _t: TFunction
 ): string {
   const services = topMerchants.slice(0, 3)
     .map(m => m.name)
@@ -200,7 +200,7 @@ function formatEntertainmentStats(
   count: number,
   average: number,
   perMonth: number,
-  t: TFunction
+  _t: TFunction
 ): string {
   return `${count} entertainment expenses • €${average.toFixed(2)} avg • ~${Math.round(perMonth)}x/month (cinema, events, dining out)`;
 }
@@ -208,7 +208,7 @@ function formatEntertainmentStats(
 function formatCashStats(
   count: number,
   perMonth: number,
-  t: TFunction
+  _t: TFunction
 ): string {
   return `${count} transactions (ATM withdrawals, transfers) • ~${Math.round(perMonth)}x/month`;
 }
@@ -217,7 +217,7 @@ function formatGenericTransactionStats(
   count: number,
   average: number,
   perMonth: number,
-  t: TFunction
+  _t: TFunction
 ): string {
   return `${count} transactions • €${average.toFixed(2)} avg • ~${Math.round(perMonth)}x/month`;
 }

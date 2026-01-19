@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface WelcomeScreenProps {
@@ -31,6 +31,24 @@ export function WelcomeScreen({ onClose }: WelcomeScreenProps) {
     }
   ], [t]);
 
+  const handleNext = useCallback(() => {
+    setCurrentStep((prev) => {
+      if (prev < steps.length - 1) {
+        return prev + 1;
+      }
+      return prev;
+    });
+  }, [steps.length]);
+
+  const handlePrevious = useCallback(() => {
+    setCurrentStep((prev) => {
+      if (prev > 0) {
+        return prev - 1;
+      }
+      return prev;
+    });
+  }, []);
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -45,19 +63,7 @@ export function WelcomeScreen({ onClose }: WelcomeScreenProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentStep, onClose]);
-
-  const handleNext = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
+  }, [handleNext, handlePrevious, onClose]);
 
   // Touch/Mouse handlers for swipe
   const handleStart = (clientX: number) => {

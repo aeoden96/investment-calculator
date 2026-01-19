@@ -3,25 +3,25 @@ import { useTranslation } from 'react-i18next';
 
 export function ThemeToggle() {
   const { t } = useTranslation();
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  
+  // Initialize theme from localStorage or system preference using lazy initialization
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window === 'undefined') return 'light';
+    
+    const localStorageTheme = localStorage.getItem('theme');
+    if (localStorageTheme === 'dark' || localStorageTheme === 'light') {
+      return localStorageTheme;
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  });
 
   useEffect(() => {
-    // Initialize theme from localStorage or system preference
-    const initializeTheme = () => {
-      const localStorageTheme = localStorage.getItem('theme');
-      if (localStorageTheme === 'dark' || localStorageTheme === 'light') {
-        return localStorageTheme;
-      }
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      }
-      return 'light';
-    };
-
-    const initialTheme = initializeTheme();
-    setTheme(initialTheme);
-    document.documentElement.setAttribute('data-theme', initialTheme);
-  }, []);
+    // Sync theme to DOM
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
