@@ -15,7 +15,8 @@
     "warnings": "Upozorenja",
     "apply": "Primijeni na Kalkulator Proračuna",
     "dataApplied": "Podaci Primijenjeni",
-    "usingData": "Korištenje podataka o potrošnji iz"
+    "usingData": "Korištenje podataka o potrošnji iz",
+    "applied": "primijenjeno"
   },
   "divider": "ili samo isprobajte kalkulator",
   "income": {
@@ -70,6 +71,134 @@
     "feature2Desc": "Vizualizirajte potrošnju kroz osnovne i diskrecijske kategorije",
     "feature3Title": "Optimizirajte Štednju",
     "feature3Desc": "Izračunajte idealne investicijske podjele i projektirajte 10-godišnji rast",
-    "getStarted": "Započni"
+    "getStarted": "Započni",
+    "close": "Zatvori pozdravni ekran",
+    "goToStep": "Idi na korak {{step}}",
+    "navigateHint": "Povucite ili koristite strelice za navigaciju",
+    "step1Title": "Dobrodošli u Kalkulator Proračuna",
+    "step1Content": "Planirajte svoj mjesečni proračun i otkrijte koliko možete priuštiti za investiranje. Pratite troškove, postavite ciljeve i maksimizirajte svoju štednju.",
+    "step2Title": "Uvezite Svoje Podatke",
+    "step2Content": "Uvezite svoj Revolut izvod računa za automatsku kategorizaciju troškova ili ručno unesite svoje prihode i troškove koristeći naš intuitivni kalkulator.",
+    "step3Title": "Pratite Svoje Investicije",
+    "step3Content": "Vidite točno koliko možete priuštiti za investiranje svaki mjesec. Vizualizirajte svoj napredak i prilagodite svoju potrošnju kako biste maksimizirali ETF investicije."
+  },
+  "controls": {
+    "switchLanguage": "Prebaci na {{language}}",
+    "toggleTheme": "Promijeni temu"
+  },
+  "categorization": {
+    "title": "Kategoriziraj Transakcije",
+    "description": "Odaberite kategoriju za svakog trgovca. To će pomoći poboljšati buduću kategorizaciju.",
+    "merchantsCategorized": "{{count}} od {{total}} trgovaca kategorizirano",
+    "transactions": "{{count}} transakcija",
+    "transactionsPlural": "{{count}} transakcija",
+    "total": "Ukupno",
+    "selectCategory": "-- Odaberi Kategoriju --",
+    "essential": "Osnovni Troškovi",
+    "discretionary": "Diskrecijski Troškovi",
+    "uncategorizedIgnored": "Nekategorizirani trgovci će biti zanemareni",
+    "cancel": "Odustani",
+    "apply": "Primijeni Kategorizaciju ({{count}})"
+  },
+  "categoryNames": {
+    "rent": "Najam",
+    "groceries": "Namirnice",
+    "utilities": "Komunalije i Usluge",
+    "transport": "Prijevoz (Bolt/Uber)",
+    "health": "Zdravlje i Lična Njega",
+    "food-delivery": "Dostava Hrane (Wolt, itd.)",
+    "fast-food": "Brza Hrana",
+    "subscriptions": "Pretplate",
+    "shopping": "Shopping (Amazon, Temu, itd.)",
+    "gaming": "Igre (Steam, itd.)",
+    "books": "Knjige i Obrazovanje",
+    "entertainment": "Zabava i Ostalo",
+    "cash": "Podizanje Gotovine i Transferi"
+  },
+  "categoryNotes": {
+    "rent": "Fiksni mjesečni trošak stanovanja • Najvažniji trošak za proračun",
+    "groceries": "256 kupnji • €12.84 prosjek po kupnji • ~5x/tjedno u Lidlu, Konzumu, Kauflandu",
+    "utilities": "48 plaćanja komunalija • KEKS Pay, telekom (A1, Telemach), CloudFlare hosting",
+    "transport": "214 vožnji ukupno (196 Bolt, 18 Uber) • €7.38 prosjek po vožnji • ~17x/mjesec (~1 vožnja svaka 2 dana)",
+    "health": "40 posjeta • dm drogerie, ljekarne, stomatologija • €26.43 prosjek • ~3x/mjesec",
+    "food-delivery": "51 narudžbi tijekom 12 mjeseci • €17.55 prosjek po narudžbi • ~4x/mjesec (svakih 7-8 dana)",
+    "fast-food": "34 posjeta McDonald'su, KFC-u, Domino'su • €10.79 prosjek • ~3x/mjesec",
+    "subscriptions": "64 ponavljajuća plaćanja • YouTube Premium, Cursor, Netflix, CloudFlare, Disney+",
+    "shopping": "20 online narudžbi • €103.55 prosjek • ~2x/mjesec • Najveća rasipnost: €533 na Amazonu",
+    "gaming": "24 kupnje igara na Steamu • €45.36 prosjek • ~2x/mjesec • Epik rasipnost: €569 odjednom!",
+    "books": "18 kupnji e-knjiga/knjiga • €10.86 prosjek • ~1-2x/mjesec s Koba",
+    "entertainment": "44 troška zabave • €8.34 prosjek • ~3-4x/mjesec (kino, događaji, putovanja, restorani)",
+    "cash": "20 transakcija (3 podizanja s bankomata, 17 transfera prijateljima) • ~2x/mjesec"
+  },
+  "allocationNames": {
+    "etf": "ETF (Dionice - VWCE/IWDA)",
+    "btc": "Bitcoin (BTC)",
+    "eth": "Ethereum (ETH)"
+  },
+  "allocationTips": {
+    "etf": "Preporučeno: 50-70% • Niži rizik, diverzificirano",
+    "btc": "Preporučeno: 15-30% • Veći rizik, veći potencijal",
+    "eth": "Preporučeno: 10-20% • Visok rizik, DeFi izloženost"
+  },
+  "tips": {
+    "transport": "Razmotrite mjesečnu kartu javnog prijevoza od €50/mjesec da uštedite €{{savings}}!",
+    "food-delivery": "~{{orders}} narudžbi/mjesec • Kuhanje kod kuće može uštedjeti €{{savings}}/mjesec",
+    "fast-food": "Razmotrite pripremu obroka unaprijed da smanjite posjete brzoj hrani",
+    "subscriptions": "Pregledajte svoje pretplate mjesečno • Otkazujte neiskorištene usluge da uštedite",
+    "shopping": "Detektirana visoka potrošnja • Pokušajte mjesečni proračun od €{{budget}} (10% prihoda)",
+    "gaming": "Pričekajte Steam rasprodaje • Game Pass nudi 100+ igara za €10-15/mjesec",
+    "groceries": "Namirnice su {{percent}}% prihoda • Pokušajte držati ispod €{{recommended}} (15%)",
+    "rent": "Najam je {{percent}}% prihoda • Ciljajte maksimalno 30% (€{{recommended}})",
+    "entertainment": "Tražite besplatne događaje i aktivnosti da smanjite troškove"
+  },
+  "stats": {
+    "analyzed": "Analizirano {{count}} transakcija od {{start}} do {{end}}",
+    "categorized": "{{count}} kategorizirano ({{percent}}%)",
+    "uncategorized": "{{uncategorized}} nekategorizirano",
+    "ridesTotal": "{{count}} vožnji ukupno ({{merchants}})",
+    "avg": "€{{amount}} prosjek",
+    "perMonth": "~{{count}}x/mjesec",
+    "monthAvg": "€{{amount}}/mjesec prosjek",
+    "considerPass": "Razmotrite mjesečnu kartu javnog prijevoza od €50/mjesec da uštedite €{{savings}}!",
+    "orders": "{{count}} narudžbi",
+    "avgPerOrder": "€{{amount}} prosjek po narudžbi",
+    "frequency": {
+      "every7Days": "svakih 7-8 dana",
+      "every2Weeks": "svaka 2 tjedna",
+      "occasionally": "povremeno"
+    },
+    "mostExpensive": "Najskuplje: €{{amount}}",
+    "visits": "{{count}} posjeta",
+    "shoppingTrips": "{{count}} kupnji",
+    "perWeek": "~{{amount}}x/tjedno",
+    "recurringCharges": "{{count}} ponavljajućih plaćanja detektirano",
+    "onlineOrders": "{{count}} online narudžbi",
+    "biggestSplurge": "Najveća rasipnost: €{{amount}}",
+    "gamePurchases": "{{count}} kupnji igara",
+    "onPlatforms": "na {{platforms}}",
+    "epicSplurge": "Epik rasipnost: €{{amount}} odjednom!",
+    "ebookPurchases": "{{count}} kupnji e-knjiga/knjiga",
+    "entertainmentExpenses": "{{count}} troškova zabave",
+    "cinemaEvents": "(kino, događaji, restorani)",
+    "utilityPayments": "{{count}} plaćanja komunalija",
+    "transactions": "{{count}} transakcija",
+    "atmWithdrawals": "(podizanja s bankomata, transferi)",
+    "top": "Najviše: {{merchants}}",
+    "generic": {
+      "rent": "Fiksni mjesečni trošak stanovanja • Obično 15-30% prihoda",
+      "groceries": "Tjedna kupnja namirnica • Planirajte obroke da smanjite otpad",
+      "utilities": "Struja, voda, internet, telefon i druge usluge",
+      "transport": "Javni prijevoz, vožnje dijeljenjem ili troškovi goriva • Razmotrite mjesečne karte",
+      "health": "Ljekarna, stomatologija, teretana i proizvodi za ličnu njegu",
+      "food-delivery": "Aplikacije za dostavu poput Wolta, Glova • Kuhanje kod kuće štedi novac",
+      "fast-food": "Brzi obroci i dostava • Razmotrite pripremu obroka unaprijed",
+      "subscriptions": "Streaming usluge, aplikacije, softver • Pregledavajte redovito za neiskorištene pretplate",
+      "shopping": "Online i maloprodajne kupnje • Postavite mjesečni limit da izbjegnete impulzivne kupnje",
+      "gaming": "Kupnje igara i sadržaja u igri • Pričekajte rasprodaje da uštedite",
+      "books": "Knjige, audio knjige, tečajevi • Knjižnice i rasprodaje nude uštede",
+      "entertainment": "Kino, događaji, restorani, putovanja • Proračun za iskustva",
+      "cash": "Podizanja s bankomata i transferi • Pažljivo pratite potrošnju gotovine",
+      "default": "Prilagodite prema svojim navikama potrošnje"
+    }
   }
 }

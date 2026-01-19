@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { expenseCategories } from '../config';
 import type { ImportedSpendingData } from '../types';
 import { formatCategoryStats } from '../utils/statsFormatter';
 import { generateTip } from '../utils/tipGenerator';
+import { getTranslatedCategoryName } from '../utils/getTranslatedCategory';
 
 interface ExpenseCategoriesProps {
   expenses: Record<string, number>;
@@ -20,30 +22,34 @@ interface CategoryCardProps {
 }
 
 function CategoryCard({ cat, value, onExpenseChange, importedData, income }: CategoryCardProps) {
+  const { t } = useTranslation();
   const categoryData = importedData?.categoryBreakdown[cat.id];
   const baseline = categoryData ? Math.round(categoryData.monthlyAverage) : undefined;
   const stats = formatCategoryStats(
     cat.id, 
     categoryData, 
     importedData?.monthsInRange || 0, 
-    income
+    income,
+    t
   );
   
   // Generate dynamic tip based on spending
-  const dynamicTip = generateTip(cat.id, value, income, baseline);
+  const dynamicTip = generateTip(cat.id, value, income, t, baseline);
+  
+  const translatedName = getTranslatedCategoryName(cat.id, t);
   
   return (
     <div className="bg-base-100 rounded-xl p-4 hover:shadow-md transition-shadow">
       <div className="flex justify-between items-center mb-2">
-        <span className="font-semibold text-lg" dangerouslySetInnerHTML={{ __html: cat.name }} />
+        <span className="font-semibold text-lg" dangerouslySetInnerHTML={{ __html: translatedName }} />
         <span className="text-xl font-bold">€{value}</span>
       </div>
       
       {/* Baseline indicator when data is imported */}
       {baseline !== undefined && baseline > 0 && (
         <div className="text-xs text-info mb-2 flex items-center gap-1">
-          <span className="font-semibold">Baseline: €{baseline}</span>
-          <span className="opacity-70">(from imported data)</span>
+          <span className="font-semibold">{t('expenses.baseline')}: €{baseline}</span>
+          <span className="opacity-70">{t('expenses.fromImportedData')}</span>
         </div>
       )}
       
@@ -76,6 +82,7 @@ function CategoryCard({ cat, value, onExpenseChange, importedData, income }: Cat
 }
 
 export function ExpenseCategories({ expenses, onExpenseChange, importedData, income }: ExpenseCategoriesProps) {
+  const { t } = useTranslation();
   const essentialCategories = expenseCategories.filter(cat => cat.group === 'essential');
   const discretionaryCategories = expenseCategories.filter(cat => cat.group === 'discretionary');
   
@@ -89,7 +96,7 @@ export function ExpenseCategories({ expenses, onExpenseChange, importedData, inc
         <h3 className="text-lg font-bold text-success flex items-center justify-between">
           <span className="flex items-center gap-2">
             <span dangerouslySetInnerHTML={{ __html: '<iconify-icon icon="mdi:check-circle" style="font-size: 1.2em;"></iconify-icon>' }} />
-            <span>Essentials</span>
+            <span>{t('categories.essentials')}</span>
           </span>
           <span className="text-sm font-normal text-success/80">€{essentialTotal.toLocaleString('en-US')}</span>
         </h3>
@@ -112,7 +119,7 @@ export function ExpenseCategories({ expenses, onExpenseChange, importedData, inc
         <h3 className="text-lg font-bold text-warning flex items-center justify-between">
           <span className="flex items-center gap-2">
             <span dangerouslySetInnerHTML={{ __html: '<iconify-icon icon="mdi:target" style="font-size: 1.2em;"></iconify-icon>' }} />
-            <span>Discretionary</span>
+            <span>{t('categories.discretionary')}</span>
           </span>
           <span className="text-sm font-normal text-warning/80">€{discretionaryTotal.toLocaleString('en-US')}</span>
         </h3>

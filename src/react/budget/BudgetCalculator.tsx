@@ -10,6 +10,7 @@ import { RevolutImport } from './components/RevolutImport';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
 import { ThemeToggle } from '../../components/ThemeToggle';
+import { ControlIsland } from '../../components/ControlIsland';
 
 function BudgetCalculatorContent() {
   const { t } = useTranslation();
@@ -43,16 +44,19 @@ function BudgetCalculatorContent() {
       {/* Welcome Screen */}
       {showWelcome && <WelcomeScreen onClose={handleWelcomeClose} />}
       
+      {/* Fixed Control Island */}
+      <ControlIsland>
+        <LanguageSwitcher />
+        <div className="w-px h-6 bg-base-300" />
+        <ThemeToggle />
+      </ControlIsland>
+      
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="px-4 py-8 md:p-8 text-center">
-          <div className="flex justify-center items-center gap-4 mb-4">
-            <h1 className="text-3xl md:text-4xl font-bold">
-              {t('title')}
-            </h1>
-            <LanguageSwitcher />
-            <ThemeToggle />
-          </div>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+            {t('title')}
+          </h1>
           <p className="text-base opacity-70">{t('subtitle')}</p>
         </div>
         

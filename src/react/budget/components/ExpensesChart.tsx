@@ -1,7 +1,9 @@
 import { useRef, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Chart } from 'chart.js/auto';
 import { expenseCategories } from '../config';
 import type { CalculatedValues } from '../types';
+import { getTranslatedCategoryName } from '../utils/getTranslatedCategory';
 
 interface ExpensesChartProps {
   expenses: Record<string, number>;
@@ -9,6 +11,7 @@ interface ExpensesChartProps {
 }
 
 export function ExpensesChart({ expenses, calculated }: ExpensesChartProps) {
+  const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartRef = useRef<Chart | null>(null);
   const [chartType, setChartType] = useState<'pie' | 'bar'>('pie');
@@ -27,14 +30,15 @@ export function ExpensesChart({ expenses, calculated }: ExpensesChartProps) {
     // Prepare data
     const categoriesData = expenseCategories
       .map(cat => ({
-        name: cat.name,
+        id: cat.id,
+        name: getTranslatedCategoryName(cat.id, t),
         value: expenses[cat.id] || 0,
         group: cat.group
       }))
       .filter(cat => cat.value > 0)
       .sort((a, b) => b.value - a.value);
     
-    const labels = categoriesData.map(cat => cat.name);
+    const labels = categoriesData.map(cat => cat.name.replace(/<[^>]*>/g, ''));
     const values = categoriesData.map(cat => cat.value);
     const colors = categoriesData.map(cat => 
       cat.group === 'essential' 
@@ -210,15 +214,15 @@ export function ExpensesChart({ expenses, calculated }: ExpensesChartProps) {
       {/* Summary Stats */}
       <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="stat bg-base-100 rounded-lg p-4">
-          <div className="stat-title text-xs">Total Expenses</div>
+          <div className="stat-title text-xs">{t('categories.totalExpenses')}</div>
           <div className="stat-value text-lg text-error">€{calculated.totalExpenses.toLocaleString('en-US')}</div>
         </div>
         <div className="stat bg-base-100 rounded-lg p-4">
-          <div className="stat-title text-xs">Essentials</div>
+          <div className="stat-title text-xs">{t('categories.essentials')}</div>
           <div className="stat-value text-lg text-success">€{calculated.essentialTotal.toLocaleString('en-US')}</div>
         </div>
         <div className="stat bg-base-100 rounded-lg p-4">
-          <div className="stat-title text-xs">Discretionary</div>
+          <div className="stat-title text-xs">{t('categories.discretionary')}</div>
           <div className="stat-value text-lg text-warning">€{calculated.discretionaryTotal.toLocaleString('en-US')}</div>
         </div>
       </div>

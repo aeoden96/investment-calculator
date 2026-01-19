@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function ThemeToggle() {
+  const { t } = useTranslation();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className="btn btn-ghost btn-sm border-none bg-transparent cursor-pointer p-2"
-      aria-label="Toggle theme"
+      aria-label={t('controls.toggleTheme')}
     >
       <svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path

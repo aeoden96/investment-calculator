@@ -1,3 +1,4 @@
+import type { TFunction } from 'i18next';
 import type { CategorySpendingData, ImportedSpendingData } from '../types';
 
 /**
@@ -7,11 +8,12 @@ export function formatCategoryStats(
   categoryId: string,
   data: CategorySpendingData | undefined,
   monthsInRange: number,
-  income: number
+  income: number,
+  t: TFunction
 ): string {
   if (!data || data.count === 0) {
     // No imported data - generate generic percentage-based stats
-    return generateGenericStats(categoryId, income);
+    return generateGenericStats(categoryId, income, t);
   }
   
   const { count, average, monthlyAverage, topMerchants, recurring, maxTransaction } = data;
@@ -20,43 +22,43 @@ export function formatCategoryStats(
   // Category-specific formatting
   switch (categoryId) {
     case 'transport':
-      return formatTransportStats(count, average, perMonth, topMerchants, monthlyAverage);
+      return formatTransportStats(count, average, perMonth, topMerchants, monthlyAverage, t);
     
     case 'food-delivery':
-      return formatFoodDeliveryStats(count, average, perMonth, maxTransaction);
+      return formatFoodDeliveryStats(count, average, perMonth, maxTransaction, t);
     
     case 'fast-food':
-      return formatFastFoodStats(count, average, perMonth, topMerchants);
+      return formatFastFoodStats(count, average, perMonth, topMerchants, t);
     
     case 'groceries':
-      return formatGroceriesStats(count, average, perMonth, topMerchants);
+      return formatGroceriesStats(count, average, perMonth, topMerchants, t);
     
     case 'subscriptions':
-      return formatSubscriptionsStats(count, recurring, monthlyAverage, topMerchants);
+      return formatSubscriptionsStats(count, recurring, monthlyAverage, topMerchants, t);
     
     case 'shopping':
-      return formatShoppingStats(count, average, perMonth, topMerchants, maxTransaction);
+      return formatShoppingStats(count, average, perMonth, topMerchants, maxTransaction, t);
     
     case 'gaming':
-      return formatGamingStats(count, average, perMonth, topMerchants, maxTransaction);
+      return formatGamingStats(count, average, perMonth, topMerchants, maxTransaction, t);
     
     case 'books':
-      return formatBooksStats(count, average, perMonth);
+      return formatBooksStats(count, average, perMonth, t);
     
     case 'health':
-      return formatHealthStats(count, average, perMonth, topMerchants);
+      return formatHealthStats(count, average, perMonth, topMerchants, t);
     
     case 'utilities':
-      return formatUtilitiesStats(count, topMerchants);
+      return formatUtilitiesStats(count, topMerchants, t);
     
     case 'entertainment':
-      return formatEntertainmentStats(count, average, perMonth);
+      return formatEntertainmentStats(count, average, perMonth, t);
     
     case 'cash':
-      return formatCashStats(count, perMonth);
+      return formatCashStats(count, perMonth, t);
     
     default:
-      return formatGenericTransactionStats(count, average, perMonth);
+      return formatGenericTransactionStats(count, average, perMonth, t);
   }
 }
 
@@ -65,7 +67,8 @@ function formatTransportStats(
   average: number,
   perMonth: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
-  monthlyAverage: number
+  monthlyAverage: number,
+  t: TFunction
 ): string {
   const merchantBreakdown = topMerchants
     .map(m => `${m.count} ${m.name}`)
@@ -78,7 +81,8 @@ function formatFoodDeliveryStats(
   count: number,
   average: number,
   perMonth: number,
-  maxTransaction: number
+  maxTransaction: number,
+  t: TFunction
 ): string {
   const frequency = perMonth >= 4 ? 'every 7-8 days' : perMonth >= 2 ? 'every 2 weeks' : 'occasionally';
   return `${count} orders • €${average.toFixed(2)} avg per order • ~${Math.round(perMonth)}x/month (${frequency}) • Most expensive: €${maxTransaction.toFixed(2)}`;
@@ -88,7 +92,8 @@ function formatFastFoodStats(
   count: number,
   average: number,
   perMonth: number,
-  topMerchants: Array<{ name: string; amount: number; count: number }>
+  topMerchants: Array<{ name: string; amount: number; count: number }>,
+  t: TFunction
 ): string {
   const topThree = topMerchants.slice(0, 3)
     .map(m => `${m.name} (€${Math.round(m.amount)})`)
@@ -101,7 +106,8 @@ function formatGroceriesStats(
   count: number,
   average: number,
   perMonth: number,
-  topMerchants: Array<{ name: string; amount: number; count: number }>
+  topMerchants: Array<{ name: string; amount: number; count: number }>,
+  t: TFunction
 ): string {
   const perWeek = perMonth / 4.33;
   const topStores = topMerchants.slice(0, 3)
@@ -115,7 +121,8 @@ function formatSubscriptionsStats(
   _count: number,
   recurring: number,
   monthlyAverage: number,
-  topMerchants: Array<{ name: string; amount: number; count: number }>
+  topMerchants: Array<{ name: string; amount: number; count: number }>,
+  t: TFunction
 ): string {
   const topSubs = topMerchants.slice(0, 3)
     .map(m => `${m.name} (€${(m.amount / m.count).toFixed(2)}/mo)`)
@@ -129,7 +136,8 @@ function formatShoppingStats(
   average: number,
   perMonth: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
-  maxTransaction: number
+  maxTransaction: number,
+  t: TFunction
 ): string {
   const topSites = topMerchants.slice(0, 3)
     .map(m => m.name)
@@ -143,7 +151,8 @@ function formatGamingStats(
   average: number,
   perMonth: number,
   topMerchants: Array<{ name: string; amount: number; count: number }>,
-  maxTransaction: number
+  maxTransaction: number,
+  t: TFunction
 ): string {
   const platforms = topMerchants.slice(0, 2)
     .map(m => m.name)
@@ -155,7 +164,8 @@ function formatGamingStats(
 function formatBooksStats(
   count: number,
   average: number,
-  perMonth: number
+  perMonth: number,
+  t: TFunction
 ): string {
   return `${count} ebook/book purchases • €${average.toFixed(2)} avg • ~${Math.round(perMonth)}x/month`;
 }
@@ -164,7 +174,8 @@ function formatHealthStats(
   count: number,
   average: number,
   perMonth: number,
-  topMerchants: Array<{ name: string; amount: number; count: number }>
+  topMerchants: Array<{ name: string; amount: number; count: number }>,
+  t: TFunction
 ): string {
   const stores = topMerchants.slice(0, 2)
     .map(m => m.name)
@@ -175,7 +186,8 @@ function formatHealthStats(
 
 function formatUtilitiesStats(
   count: number,
-  topMerchants: Array<{ name: string; amount: number; count: number }>
+  topMerchants: Array<{ name: string; amount: number; count: number }>,
+  t: TFunction
 ): string {
   const services = topMerchants.slice(0, 3)
     .map(m => m.name)
@@ -187,14 +199,16 @@ function formatUtilitiesStats(
 function formatEntertainmentStats(
   count: number,
   average: number,
-  perMonth: number
+  perMonth: number,
+  t: TFunction
 ): string {
   return `${count} entertainment expenses • €${average.toFixed(2)} avg • ~${Math.round(perMonth)}x/month (cinema, events, dining out)`;
 }
 
 function formatCashStats(
   count: number,
-  perMonth: number
+  perMonth: number,
+  t: TFunction
 ): string {
   return `${count} transactions (ATM withdrawals, transfers) • ~${Math.round(perMonth)}x/month`;
 }
@@ -202,7 +216,8 @@ function formatCashStats(
 function formatGenericTransactionStats(
   count: number,
   average: number,
-  perMonth: number
+  perMonth: number,
+  t: TFunction
 ): string {
   return `${count} transactions • €${average.toFixed(2)} avg • ~${Math.round(perMonth)}x/month`;
 }
@@ -210,61 +225,27 @@ function formatGenericTransactionStats(
 /**
  * Generates generic stats when no import data is available
  */
-function generateGenericStats(categoryId: string, _income: number): string {
-  switch (categoryId) {
-    case 'rent':
-      return 'Fixed monthly housing cost • Typically 15-30% of income';
-    
-    case 'groceries':
-      return 'Weekly shopping for essentials • Plan meals to reduce waste';
-    
-    case 'utilities':
-      return 'Electricity, water, internet, phone, and other services';
-    
-    case 'transport':
-      return 'Public transport, ride-sharing, or fuel costs • Consider monthly passes';
-    
-    case 'health':
-      return 'Pharmacy, dental care, gym, and personal care items';
-    
-    case 'food-delivery':
-      return 'Delivery apps like Wolt, Glovo • Cooking at home saves money';
-    
-    case 'fast-food':
-      return 'Quick meals and takeaway • Consider meal prepping';
-    
-    case 'subscriptions':
-      return 'Streaming services, apps, software • Review regularly for unused subs';
-    
-    case 'shopping':
-      return 'Online and retail purchases • Set a monthly limit to avoid impulse buys';
-    
-    case 'gaming':
-      return 'Game purchases and in-game content • Wait for sales to save';
-    
-    case 'books':
-      return 'Books, audiobooks, courses • Libraries and sales offer savings';
-    
-    case 'entertainment':
-      return 'Cinema, events, dining out, travel • Budget for experiences';
-    
-    case 'cash':
-      return 'ATM withdrawals and transfers • Track cash spending carefully';
-    
-    default:
-      return 'Adjust based on your spending habits';
-  }
+function generateGenericStats(categoryId: string, _income: number, t: TFunction): string {
+  return t(`stats.generic.${categoryId}`, { defaultValue: t('stats.generic.default') });
 }
 
 /**
  * Formats a summary of imported spending data
  */
-export function formatImportSummary(data: ImportedSpendingData): string {
+export function formatImportSummary(data: ImportedSpendingData, t: TFunction): string {
   const categorizedCount = Object.values(data.categoryBreakdown)
     .reduce((sum, cat) => sum + cat.count, 0);
   const categorizationRate = data.totalTransactions > 0 
     ? (categorizedCount / data.totalTransactions * 100).toFixed(1)
     : '0';
   
-  return `Analyzed ${data.totalTransactions} transactions from ${data.dateRange.start} to ${data.dateRange.end} • ${categorizedCount} categorized (${categorizationRate}%) • ${data.uncategorized.length} uncategorized`;
+  const analyzed = t('stats.analyzed', { 
+    count: data.totalTransactions, 
+    start: data.dateRange.start, 
+    end: data.dateRange.end 
+  });
+  const categorized = t('stats.categorized', { count: categorizedCount, percent: categorizationRate });
+  const uncategorized = t('stats.uncategorized', { uncategorized: data.uncategorized.length });
+  
+  return `${analyzed} • ${categorized} • ${uncategorized}`;
 }

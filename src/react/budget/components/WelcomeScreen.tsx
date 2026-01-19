@@ -1,33 +1,35 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface WelcomeScreenProps {
   onClose: () => void;
 }
 
 export function WelcomeScreen({ onClose }: WelcomeScreenProps) {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const steps = [
+  const steps = useMemo(() => [
     {
-      title: "Welcome to Budget Calculator",
+      title: t('welcome.step1Title'),
       icon: "💰",
-      content: "Plan your monthly budget and discover how much you can afford to invest. Track expenses, set goals, and maximize your savings."
+      content: t('welcome.step1Content')
     },
     {
-      title: "Import Your Data",
+      title: t('welcome.step2Title'),
       icon: "📊",
-      content: "Import your Revolut bank statement for automatic expense categorization, or manually enter your income and expenses using our intuitive calculator."
+      content: t('welcome.step2Content')
     },
     {
-      title: "Track Your Investments",
+      title: t('welcome.step3Title'),
       icon: "📈",
-      content: "See exactly how much you can afford to invest each month. Visualize your progress and adjust your spending to maximize ETF investments."
+      content: t('welcome.step3Content')
     }
-  ];
+  ], [t]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -129,7 +131,7 @@ export function WelcomeScreen({ onClose }: WelcomeScreenProps) {
       <button
         onClick={onClose}
         className="absolute top-4 right-4 btn btn-circle btn-ghost btn-sm"
-        aria-label="Close welcome screen"
+        aria-label={t('welcome.close')}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -205,7 +207,7 @@ export function WelcomeScreen({ onClose }: WelcomeScreenProps) {
                       ? 'bg-primary w-8'
                       : 'bg-base-300 hover:bg-base-content/30'
                   }`}
-                  aria-label={`Go to step ${index + 1}`}
+                  aria-label={t('welcome.goToStep', { step: index + 1 })}
                   aria-current={index === currentStep ? 'step' : undefined}
                 />
               ))}
@@ -218,14 +220,14 @@ export function WelcomeScreen({ onClose }: WelcomeScreenProps) {
                   onClick={onClose}
                   className="btn btn-primary btn-lg w-full max-w-xs mx-auto block"
                 >
-                  Get Started
+                  {t('welcome.getStarted')}
                 </button>
               </div>
             )}
 
             {/* Navigation Hint */}
             <div className="text-center text-sm opacity-50 mt-4">
-              <p>Swipe or use arrow keys to navigate</p>
+              <p>{t('welcome.navigateHint')}</p>
             </div>
           </div>
         </div>

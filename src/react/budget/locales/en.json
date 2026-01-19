@@ -15,7 +15,8 @@
     "warnings": "Warnings",
     "apply": "Apply to Budget Calculator",
     "dataApplied": "Data Applied",
-    "usingData": "Using spending data from"
+    "usingData": "Using spending data from",
+    "applied": "applied"
   },
   "divider": "or just try the calculator",
   "income": {
@@ -70,6 +71,134 @@
     "feature2Desc": "Visualize spending across essential and discretionary categories",
     "feature3Title": "Optimize Savings",
     "feature3Desc": "Calculate ideal investment splits and project 10-year growth",
-    "getStarted": "Get Started"
+    "getStarted": "Get Started",
+    "close": "Close welcome screen",
+    "goToStep": "Go to step {{step}}",
+    "navigateHint": "Swipe or use arrow keys to navigate",
+    "step1Title": "Welcome to Budget Calculator",
+    "step1Content": "Plan your monthly budget and discover how much you can afford to invest. Track expenses, set goals, and maximize your savings.",
+    "step2Title": "Import Your Data",
+    "step2Content": "Import your Revolut bank statement for automatic expense categorization, or manually enter your income and expenses using our intuitive calculator.",
+    "step3Title": "Track Your Investments",
+    "step3Content": "See exactly how much you can afford to invest each month. Visualize your progress and adjust your spending to maximize ETF investments."
+  },
+  "controls": {
+    "switchLanguage": "Switch to {{language}}",
+    "toggleTheme": "Toggle theme"
+  },
+  "categorization": {
+    "title": "Categorize Transactions",
+    "description": "Select a category for each merchant. This will help improve future categorization.",
+    "merchantsCategorized": "{{count}} of {{total}} merchants categorized",
+    "transactions": "{{count}} transaction",
+    "transactionsPlural": "{{count}} transactions",
+    "total": "Total",
+    "selectCategory": "-- Select Category --",
+    "essential": "Essential",
+    "discretionary": "Discretionary",
+    "uncategorizedIgnored": "Uncategorized merchants will be ignored",
+    "cancel": "Cancel",
+    "apply": "Apply Categorization ({{count}})"
+  },
+  "categoryNames": {
+    "rent": "Rent",
+    "groceries": "Groceries",
+    "utilities": "Utilities & Services",
+    "transport": "Transportation (Bolt/Uber)",
+    "health": "Health & Personal Care",
+    "food-delivery": "Food Delivery (Wolt, etc)",
+    "fast-food": "Fast Food",
+    "subscriptions": "Subscriptions",
+    "shopping": "Shopping (Amazon, Temu, etc)",
+    "gaming": "Gaming (Steam, etc)",
+    "books": "Books & Education",
+    "entertainment": "Entertainment & Other",
+    "cash": "Cash Withdrawals & Transfers"
+  },
+  "categoryNotes": {
+    "rent": "Fixed monthly housing cost • Most important expense to budget for",
+    "groceries": "256 shopping trips • €12.84 avg per trip • ~5x/week at Lidl, Konzum, Kaufland",
+    "utilities": "48 utility payments • KEKS Pay, telecom (A1, Telemach), CloudFlare hosting",
+    "transport": "214 rides total (196 Bolt, 18 Uber) • €7.38 avg ride • ~17x/month (~1 ride every 2 days)",
+    "health": "40 visits • dm drogerie, pharmacies, dental • €26.43 avg • ~3x/month",
+    "food-delivery": "51 orders over 12 months • €17.55 avg per order • ~4x/month (every 7-8 days)",
+    "fast-food": "34 visits to McDonald's, KFC, Domino's • €10.79 avg • ~3x/month",
+    "subscriptions": "64 recurring charges • YouTube Premium, Cursor, Netflix, CloudFlare, Disney+",
+    "shopping": "20 online orders • €103.55 avg • ~2x/month • Biggest splurge: €533 on Amazon",
+    "gaming": "24 game purchases on Steam • €45.36 avg • ~2x/month • Epic splurge: €569 in one go!",
+    "books": "18 ebook/book purchases • €10.86 avg • ~1-2x/month from Kobo",
+    "entertainment": "44 entertainment expenses • €8.34 avg • ~3-4x/month (cinema, events, travel, dining out)",
+    "cash": "20 transactions (3 ATM withdrawals, 17 friend transfers) • ~2x/month"
+  },
+  "allocationNames": {
+    "etf": "ETF (Stocks - VWCE/IWDA)",
+    "btc": "Bitcoin (BTC)",
+    "eth": "Ethereum (ETH)"
+  },
+  "allocationTips": {
+    "etf": "Recommended: 50-70% • Lower risk, diversified",
+    "btc": "Recommended: 15-30% • Higher risk, higher potential",
+    "eth": "Recommended: 10-20% • High risk, DeFi exposure"
+  },
+  "tips": {
+    "transport": "Consider a public transport pass at €50/month to save €{{savings}}!",
+    "food-delivery": "~{{orders}} orders/month • Cooking at home could save €{{savings}}/month",
+    "fast-food": "Consider meal prepping to reduce fast food visits",
+    "subscriptions": "Review your subscriptions monthly • Cancel unused services to save",
+    "shopping": "High spending detected • Try a monthly budget of €{{budget}} (10% of income)",
+    "gaming": "Wait for Steam sales • Game Pass offers 100+ games for €10-15/month",
+    "groceries": "Groceries are {{percent}}% of income • Try to keep under €{{recommended}} (15%)",
+    "rent": "Rent is {{percent}}% of income • Aim for max 30% (€{{recommended}})",
+    "entertainment": "Look for free events and activities to reduce costs"
+  },
+  "stats": {
+    "analyzed": "Analyzed {{count}} transactions from {{start}} to {{end}}",
+    "categorized": "{{count}} categorized ({{percent}}%)",
+    "uncategorized": "{{uncategorized}} uncategorized",
+    "ridesTotal": "{{count}} rides total ({{merchants}})",
+    "avg": "€{{amount}} avg",
+    "perMonth": "~{{count}}x/month",
+    "monthAvg": "€{{amount}}/month avg",
+    "considerPass": "Consider €50/month public pass to save €{{savings}}!",
+    "orders": "{{count}} orders",
+    "avgPerOrder": "€{{amount}} avg per order",
+    "frequency": {
+      "every7Days": "every 7-8 days",
+      "every2Weeks": "every 2 weeks",
+      "occasionally": "occasionally"
+    },
+    "mostExpensive": "Most expensive: €{{amount}}",
+    "visits": "{{count}} visits",
+    "shoppingTrips": "{{count}} shopping trips",
+    "perWeek": "~{{amount}}x/week",
+    "recurringCharges": "{{count}} recurring charges detected",
+    "onlineOrders": "{{count}} online orders",
+    "biggestSplurge": "Biggest splurge: €{{amount}}",
+    "gamePurchases": "{{count}} game purchases",
+    "onPlatforms": "on {{platforms}}",
+    "epicSplurge": "Epic splurge: €{{amount}} in one go!",
+    "ebookPurchases": "{{count}} ebook/book purchases",
+    "entertainmentExpenses": "{{count}} entertainment expenses",
+    "cinemaEvents": "(cinema, events, dining out)",
+    "utilityPayments": "{{count}} utility payments",
+    "transactions": "{{count}} transactions",
+    "atmWithdrawals": "(ATM withdrawals, transfers)",
+    "top": "Top: {{merchants}}",
+    "generic": {
+      "rent": "Fixed monthly housing cost • Typically 15-30% of income",
+      "groceries": "Weekly shopping for essentials • Plan meals to reduce waste",
+      "utilities": "Electricity, water, internet, phone, and other services",
+      "transport": "Public transport, ride-sharing, or fuel costs • Consider monthly passes",
+      "health": "Pharmacy, dental care, gym, and personal care items",
+      "food-delivery": "Delivery apps like Wolt, Glovo • Cooking at home saves money",
+      "fast-food": "Quick meals and takeaway • Consider meal prepping",
+      "subscriptions": "Streaming services, apps, software • Review regularly for unused subs",
+      "shopping": "Online and retail purchases • Set a monthly limit to avoid impulse buys",
+      "gaming": "Game purchases and in-game content • Wait for sales to save",
+      "books": "Books, audiobooks, courses • Libraries and sales offer savings",
+      "entertainment": "Cinema, events, dining out, travel • Budget for experiences",
+      "cash": "ATM withdrawals and transfers • Track cash spending carefully",
+      "default": "Adjust based on your spending habits"
+    }
   }
 }

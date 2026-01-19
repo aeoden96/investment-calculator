@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Transaction } from '../types';
 import { expenseCategories } from '../config';
+import { getTranslatedCategoryName } from '../utils/getTranslatedCategory';
 
 interface CategorizationModalProps {
   isOpen: boolean;
@@ -15,6 +17,8 @@ export function CategorizationModal({
   uncategorizedTransactions,
   onApplyMappings
 }: CategorizationModalProps) {
+  const { t } = useTranslation();
+  
   // Extract unique merchants with their total amounts
   const uniqueMerchants = useMemo(() => {
     const merchantMap = new Map<string, { totalAmount: number; count: number }>();
@@ -76,13 +80,15 @@ export function CategorizationModal({
       <div className="bg-base-100 rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] flex flex-col">
         {/* Header */}
         <div className="p-6 border-b border-base-300">
-          <h2 className="text-2xl font-bold mb-2">Categorize Transactions</h2>
+          <h2 className="text-2xl font-bold mb-2">{t('categorization.title')}</h2>
           <p className="text-sm opacity-70">
-            Select a category for each merchant. This will help improve future categorization.
+            {t('categorization.description')}
           </p>
           <div className="mt-2 text-sm">
-            <span className="font-semibold">{categorizedCount}</span> of{' '}
-            <span className="font-semibold">{uniqueMerchants.length}</span> merchants categorized
+            {t('categorization.merchantsCategorized', { 
+              count: categorizedCount, 
+              total: uniqueMerchants.length 
+            })}
           </div>
         </div>
         
@@ -100,7 +106,10 @@ export function CategorizationModal({
                     {merchant}
                   </div>
                   <div className="text-xs opacity-70">
-                    {count} transaction{count > 1 ? 's' : ''} • Total: €{totalAmount.toFixed(2)}
+                    {count > 1 
+                      ? t('categorization.transactionsPlural', { count })
+                      : t('categorization.transactions', { count })
+                    } • {t('categorization.total')}: €{totalAmount.toFixed(2)}
                   </div>
                 </div>
                 
@@ -110,24 +119,30 @@ export function CategorizationModal({
                   onChange={(e) => handleCategoryChange(merchant, e.target.value)}
                   className="select select-bordered select-sm w-64"
                 >
-                  <option value="undecided">-- Select Category --</option>
-                  <optgroup label="Essential">
+                  <option value="undecided">{t('categorization.selectCategory')}</option>
+                  <optgroup label={t('categorization.essential')}>
                     {allCategories
                       .filter(cat => expenseCategories.find(c => c.id === cat.id)?.group === 'essential')
-                      .map(cat => (
-                        <option key={cat.id} value={cat.id}>
-                          {cat.name.replace(/<[^>]*>/g, '')}
-                        </option>
-                      ))}
+                      .map(cat => {
+                        const translatedName = getTranslatedCategoryName(cat.id, t);
+                        return (
+                          <option key={cat.id} value={cat.id}>
+                            {translatedName.replace(/<[^>]*>/g, '')}
+                          </option>
+                        );
+                      })}
                   </optgroup>
-                  <optgroup label="Discretionary">
+                  <optgroup label={t('categorization.discretionary')}>
                     {allCategories
                       .filter(cat => expenseCategories.find(c => c.id === cat.id)?.group === 'discretionary')
-                      .map(cat => (
-                        <option key={cat.id} value={cat.id}>
-                          {cat.name.replace(/<[^>]*>/g, '')}
-                        </option>
-                      ))}
+                      .map(cat => {
+                        const translatedName = getTranslatedCategoryName(cat.id, t);
+                        return (
+                          <option key={cat.id} value={cat.id}>
+                            {translatedName.replace(/<[^>]*>/g, '')}
+                          </option>
+                        );
+                      })}
                   </optgroup>
                 </select>
               </div>
@@ -138,18 +153,18 @@ export function CategorizationModal({
         {/* Footer */}
         <div className="p-6 border-t border-base-300 flex justify-between items-center">
           <div className="text-sm opacity-70">
-            Uncategorized merchants will be ignored
+            {t('categorization.uncategorizedIgnored')}
           </div>
           <div className="flex gap-3">
             <button onClick={onClose} className="btn btn-ghost">
-              Cancel
+              {t('categorization.cancel')}
             </button>
             <button 
               onClick={handleApply} 
               className="btn btn-primary"
               disabled={categorizedCount === 0}
             >
-              Apply Categorization ({categorizedCount})
+              {t('categorization.apply', { count: categorizedCount })}
             </button>
           </div>
         </div>

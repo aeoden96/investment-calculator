@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { iconifyIcon } from '../config';
 import type { ImportedSpendingData } from '../types';
 import { validateRevolutCSV, analyzeCSV } from '../utils/csvAnalyzer';
 import { formatImportSummary } from '../utils/statsFormatter';
 import { CategorizationModal } from './CategorizationModal';
+import { getTranslatedCategoryName } from '../utils/getTranslatedCategory';
 
 interface RevolutImportProps {
   onApplyImport: (data: ImportedSpendingData) => void;
@@ -12,6 +14,7 @@ interface RevolutImportProps {
 }
 
 export function RevolutImport({ onApplyImport, onReset, hasImportedData }: RevolutImportProps) {
+  const { t } = useTranslation();
   const [validation, setValidation] = useState<{ isValid: boolean; errors: string[]; warnings: string[] } | null>(null);
   const [analyzedData, setAnalyzedData] = useState<ImportedSpendingData | null>(null);
   const [csvText, setCsvText] = useState<string>('');
@@ -86,7 +89,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
         <div className="flex justify-between items-start mb-2">
           <div>
             <h2 className="text-lg font-bold border-b border-base-300 pb-2">
-              Import Revolut Account Statement
+              {t('import.title')}
             </h2>
           </div>
           {hasImportedData && (
@@ -95,7 +98,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
               className="btn btn-sm btn-error btn-outline"
             >
               <span dangerouslySetInnerHTML={{ __html: iconifyIcon('mdi:refresh', '1.2em') }} />
-              Reset to Defaults
+              {t('import.reset')}
             </button>
           )}
         </div>
@@ -103,7 +106,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
         {!hasImportedData && (
           <div className="form-control w-full">
             <label className="label">
-              <span className="label-text">Upload your Revolut account statement CSV file</span>
+              <span className="label-text">{t('import.upload')}</span>
             </label>
             <div className="flex flex-col gap-2">
               <input
@@ -121,7 +124,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
           <div className="mt-4">
             {!validation.isValid ? (
               <div className="p-4 rounded-lg border border-error bg-error/10">
-                <div className="font-bold text-error mb-2">❌ Validation Failed</div>
+                <div className="font-bold text-error mb-2">❌ {t('import.validationFailed')}</div>
                 <ul className="list-disc list-inside text-sm space-y-1">
                   {validation.errors.map((error, i) => (
                     <li key={i} className="text-error">{error}</li>
@@ -130,40 +133,47 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
               </div>
             ) : analyzedData ? (
               <div className="p-4 rounded-lg border border-success bg-success/10">
-                <div className="font-bold text-success mb-3">✅ File Analyzed Successfully</div>
-                <div className="text-sm mb-3">{formatImportSummary(analyzedData)}</div>
+                <div className="font-bold text-success mb-3">✅ {t('import.analysisSuccess')}</div>
+                <div className="text-sm mb-3">{formatImportSummary(analyzedData, t)}</div>
                 
                 {/* Category breakdown summary */}
                 <div className="mt-3 p-3 bg-base-100 rounded text-sm">
-                  <div className="font-semibold mb-2">Category Breakdown:</div>
+                  <div className="font-semibold mb-2">{t('import.categoryBreakdown')}:</div>
                   <div className="grid grid-cols-2 gap-2">
                     {Object.entries(analyzedData.categoryBreakdown)
                       .sort((a, b) => b[1].total - a[1].total)
                       .slice(0, 6)
-                      .map(([category, data]) => (
-                        <div key={category} className="flex justify-between">
-                          <span className="capitalize">{category.replace('-', ' ')}:</span>
-                          <span className="font-semibold">€{Math.round(data.monthlyAverage)}/mo</span>
-                        </div>
-                      ))}
+                      .map(([category, data]) => {
+                        const translatedName = getTranslatedCategoryName(category, t);
+                        const plainName = translatedName.replace(/<[^>]*>/g, '');
+                        return (
+                          <div key={category} className="flex justify-between">
+                            <span className="capitalize">{plainName}:</span>
+                            <span className="font-semibold">€{Math.round(data.monthlyAverage)}/mo</span>
+                          </div>
+                        );
+                      })}
                   </div>
                   {analyzedData.uncategorized.length > 0 && (
                     <div className="mt-2 p-3 bg-warning/10 rounded border border-warning">
                       <div className="flex items-center justify-between">
                         <div className="text-sm font-semibold text-warning">
-                          {analyzedData.uncategorized.length} transactions could not be categorized
+                          {analyzedData.uncategorized.length} {t('import.uncategorized')}
                         </div>
                         <button
                           onClick={() => setIsModalOpen(true)}
                           className="btn btn-sm btn-warning"
                         >
                           <span dangerouslySetInnerHTML={{ __html: iconifyIcon('mdi:tag-plus', '1.2em') }} />
-                          Categorize Manually
+                          {t('import.categorizeManually')}
                         </button>
                       </div>
                       {Object.keys(customMappings).length > 0 && (
                         <div className="mt-2 text-xs text-success">
-                          {Object.keys(customMappings).length} custom categorization{Object.keys(customMappings).length > 1 ? 's' : ''} applied
+                          {Object.keys(customMappings).length} {Object.keys(customMappings).length > 1 
+                            ? t('import.customMappingsPlural')
+                            : t('import.customMappings')
+                          } {t('import.applied', { defaultValue: 'applied' })}
                         </div>
                       )}
                     </div>
@@ -172,7 +182,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
                 
                 {validation.warnings.length > 0 && (
                   <div className="mt-3 p-3 bg-warning/10 rounded border border-warning text-sm">
-                    <div className="font-semibold text-warning mb-2">⚠️ Warnings:</div>
+                    <div className="font-semibold text-warning mb-2">⚠️ {t('import.warnings')}:</div>
                     <ul className="list-disc list-inside space-y-1">
                       {validation.warnings.map((warning, i) => (
                         <li key={i} className="text-warning">{warning}</li>
@@ -187,7 +197,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
                   className="btn btn-primary w-full mt-4"
                 >
                   <span dangerouslySetInnerHTML={{ __html: iconifyIcon('mdi:check', '1.2em') }} />
-                  Apply to Budget Calculator
+                  {t('import.apply')}
                 </button>
               </div>
             ) : null}
@@ -199,10 +209,10 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
           <div className="mt-4 p-4 rounded-lg border border-info bg-info/10">
             <div className="font-bold text-info mb-2">
               <span dangerouslySetInnerHTML={{ __html: iconifyIcon('mdi:information', '1.2em') }} />
-              {' '}Data Applied
+              {' '}{t('import.dataApplied')}
             </div>
             <div className="text-sm">
-              Using spending data from {fileName}
+              {t('import.usingData')} {fileName}
             </div>
           </div>
         )}

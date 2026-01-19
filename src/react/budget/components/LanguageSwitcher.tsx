@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 export function LanguageSwitcher() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   
   const languages = [
     { code: 'en', label: 'EN', flag: '🇬🇧' },
@@ -19,9 +19,8 @@ export function LanguageSwitcher() {
               ? 'btn-primary' 
               : 'btn-ghost'
           }`}
-          aria-label={`Switch to ${lang.label}`}
+          aria-label={t('controls.switchLanguage', { language: lang.label })}
         >
-          <span className="mr-1">{lang.flag}</span>
           {lang.label}
         </button>
       ))}
