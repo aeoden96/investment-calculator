@@ -1,0 +1,75 @@
+{
+  "title": "Mjesečni Kalkulator Proračuna",
+  "subtitle": "Prilagodite svoju potrošnju kako biste maksimizirali ETF investicije",
+  "import": {
+    "title": "Uvezi Revolut Izvod Računa",
+    "upload": "Učitajte svoj Revolut CSV izvod računa",
+    "reset": "Vrati na Zadano",
+    "validationFailed": "Validacija Neuspjela",
+    "analysisSuccess": "Datoteka Uspješno Analizirana",
+    "categoryBreakdown": "Raščlamba Kategorija",
+    "uncategorized": "transakcija nije moglo biti kategorizirano",
+    "categorizeManually": "Kategoriziraj Ručno",
+    "customMappings": "prilagođena kategorizacija",
+    "customMappingsPlural": "prilagođene kategorizacije",
+    "warnings": "Upozorenja",
+    "apply": "Primijeni na Kalkulator Proračuna",
+    "dataApplied": "Podaci Primijenjeni",
+    "usingData": "Korištenje podataka o potrošnji iz"
+  },
+  "divider": "ili samo isprobajte kalkulator",
+  "income": {
+    "title": "Prihod",
+    "monthlySalary": "Mjesečna Plaća"
+  },
+  "presets": {
+    "title": "Brzi Predlošci",
+    "baseline": "Osnovna Linija",
+    "moderate": "Umjerene Uštede",
+    "aggressive": "Agresivne Uštede",
+    "description": "Kliknite na predložak za brzo prilagođavanje kategorija troškova"
+  },
+  "expenses": {
+    "title": "Mjesečni Troškovi",
+    "baseline": "Osnovna Linija",
+    "fromImportedData": "(iz uvezenih podataka)"
+  },
+  "categories": {
+    "essentials": "Osnovni Troškovi",
+    "discretionary": "Diskrecijski Troškovi",
+    "ofExpenses": "troškova",
+    "ofIncome": "prihoda",
+    "totalExpenses": "Ukupni Troškovi"
+  },
+  "drawer": {
+    "savingsRate": "Stopa Štednje",
+    "monthlyInvestment": "Mjesečna Investicija",
+    "investmentDetails": "Detalji Investicije",
+    "financialSummary": "Financijski Sažetak",
+    "monthlyIncome": "Mjesečni Prihod",
+    "totalExpenses": "Ukupni Troškovi",
+    "monthlySurplus": "Mjesečni Višak",
+    "totalInvestment": "Ukupna Investicija",
+    "safetyBuffer": "Sigurnosna Pričuva",
+    "investmentAllocation": "Alokacija Investicije",
+    "investmentVsBuffer": "Investicija vs Pričuva",
+    "recommended": "Preporučeno",
+    "projection10Year": "10-godišnja Projekcija",
+    "monthInvestment": "/mjesec investicija",
+    "totalInvested": "Ukupno Investirano",
+    "estimatedValue": "Procijenjena Vrijednost",
+    "profit": "Profit",
+    "recommendedRate": "Preporučeno: 15-20% • Idealno: 30%+ • Izvrsno: 50%+"
+  },
+  "welcome": {
+    "title": "Dobrodošli u Kalkulator Proračuna!",
+    "subtitle": "Vaš osobni financijski pratitelj",
+    "feature1Title": "Uvezite Svoje Podatke",
+    "feature1Desc": "Učitajte svoj Revolut CSV za automatsku kategorizaciju troškova",
+    "feature2Title": "Pratite Troškove",
+    "feature2Desc": "Vizualizirajte potrošnju kroz osnovne i diskrecijske kategorije",
+    "feature3Title": "Optimizirajte Štednju",
+    "feature3Desc": "Izračunajte idealne investicijske podjele i projektirajte 10-godišnji rast",
+    "getStarted": "Započni"
+  }
+}

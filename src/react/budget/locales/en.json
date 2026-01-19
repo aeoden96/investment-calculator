@@ -1,0 +1,75 @@
+{
+  "title": "Monthly Budget Calculator",
+  "subtitle": "Adjust your spending to maximize ETF investments",
+  "import": {
+    "title": "Import Revolut Account Statement",
+    "upload": "Upload your Revolut account statement CSV file",
+    "reset": "Reset to Defaults",
+    "validationFailed": "Validation Failed",
+    "analysisSuccess": "File Analyzed Successfully",
+    "categoryBreakdown": "Category Breakdown",
+    "uncategorized": "transactions could not be categorized",
+    "categorizeManually": "Categorize Manually",
+    "customMappings": "custom categorization",
+    "customMappingsPlural": "custom categorizations",
+    "warnings": "Warnings",
+    "apply": "Apply to Budget Calculator",
+    "dataApplied": "Data Applied",
+    "usingData": "Using spending data from"
+  },
+  "divider": "or just try the calculator",
+  "income": {
+    "title": "Income",
+    "monthlySalary": "Monthly Salary"
+  },
+  "presets": {
+    "title": "Quick Presets",
+    "baseline": "Baseline",
+    "moderate": "Moderate Savings",
+    "aggressive": "Aggressive Savings",
+    "description": "Click a preset to quickly adjust your expense categories"
+  },
+  "expenses": {
+    "title": "Monthly Expenses",
+    "baseline": "Baseline",
+    "fromImportedData": "(from imported data)"
+  },
+  "categories": {
+    "essentials": "Essentials",
+    "discretionary": "Discretionary",
+    "ofExpenses": "of expenses",
+    "ofIncome": "of income",
+    "totalExpenses": "Total Expenses"
+  },
+  "drawer": {
+    "savingsRate": "Savings Rate",
+    "monthlyInvestment": "Monthly Investment",
+    "investmentDetails": "Investment Details",
+    "financialSummary": "Financial Summary",
+    "monthlyIncome": "Monthly Income",
+    "totalExpenses": "Total Expenses",
+    "monthlySurplus": "Monthly Surplus",
+    "totalInvestment": "Total Investment",
+    "safetyBuffer": "Safety Buffer",
+    "investmentAllocation": "Investment Allocation",
+    "investmentVsBuffer": "Investment vs Buffer",
+    "recommended": "Recommended",
+    "projection10Year": "10-Year Projection",
+    "monthInvestment": "/month investment",
+    "totalInvested": "Total Invested",
+    "estimatedValue": "Estimated Value",
+    "profit": "Profit",
+    "recommendedRate": "Recommended: 15-20% • Ideal: 30%+ • Excellent: 50%+"
+  },
+  "welcome": {
+    "title": "Welcome to Budget Calculator!",
+    "subtitle": "Your personal finance companion",
+    "feature1Title": "Import Your Data",
+    "feature1Desc": "Upload your Revolut CSV to automatically categorize expenses",
+    "feature2Title": "Track Expenses",
+    "feature2Desc": "Visualize spending across essential and discretionary categories",
+    "feature3Title": "Optimize Savings",
+    "feature3Desc": "Calculate ideal investment splits and project 10-year growth",
+    "getStarted": "Get Started"
+  }
+}
