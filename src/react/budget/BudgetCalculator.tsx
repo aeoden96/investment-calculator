@@ -53,7 +53,7 @@ function BudgetCalculatorContent() {
       
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="px-4 py-8 md:p-8 text-center">
+        <div className="px-4 py-8 md:p-8 text-center pt-16 md:pt-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             {t('title')}
           </h1>

@@ -4,6 +4,7 @@
   "import": {
     "title": "Uvezi Revolut Izvod Računa",
     "upload": "Učitajte svoj Revolut CSV izvod računa",
+    "chooseFile": "Odaberi Datoteku",
     "reset": "Vrati na Zadano",
     "validationFailed": "Validacija Neuspjela",
     "analysisSuccess": "Datoteka Uspješno Analizirana",
@@ -60,7 +61,12 @@
     "totalInvested": "Ukupno Investirano",
     "estimatedValue": "Procijenjena Vrijednost",
     "profit": "Profit",
-    "recommendedRate": "Preporučeno: 15-20% • Idealno: 30%+ • Izvrsno: 50%+"
+    "recommendedRate": "Preporučeno: 15-20% • Idealno: 30%+ • Izvrsno: 50%+",
+    "savingsRateGuidelines": "Preporučeno: 15-20% • Idealno: 30%+ • Izvrsno: 50%+",
+    "toggleAriaLabel": "Prebaci ladicu stope štednje",
+    "investmentSplitRecommended": "Preporučeno: 50-70% investicija",
+    "projectionRates": "ETF @ 7%, BTC @ 15%, ETH @ 12%",
+    "splitInto": "podijeljeno na"
   },
   "welcome": {
     "title": "Dobrodošli u Kalkulator Proračuna!",
@@ -199,6 +205,29 @@
       "entertainment": "Kino, događaji, restorani, putovanja • Proračun za iskustva",
       "cash": "Podizanja s bankomata i transferi • Pažljivo pratite potrošnju gotovine",
       "default": "Prilagodite prema svojim navikama potrošnje"
+    }
+  },
+  "alerts": {
+    "critical": {
+      "title": "Kritično:",
+      "message": "Trošite više nego što zarađujete! Smanjite troškove odmah."
+    },
+    "lowSavings": {
+      "title": "Niska Stopa Štednje:",
+      "message": "Pokušajte uštedjeti najmanje 15% vašeg prihoda. Razmotrite pregled diskrecijskih troškova."
+    },
+    "excellent": {
+      "title": "Izvrsno!",
+      "message": "Štedite preko 30% - odličan posao! Ovo vas stavlja na put financijske neovisnosti."
+    },
+    "good": {
+      "title": "Dobro!",
+      "message": "Na pravom ste putu sa zdravom stopom štednje. Nastavite tako!"
+    },
+    "emergency": {
+      "title": "Hitni Fond:",
+      "recommended": "Izgradite do €{{amount}} (3 mjeseca troškova) prije agresivnog investiranja. Trenutna pričuva: €{{current}}",
+      "ideal": "Dobar početak! Razmotrite izgradnju do €{{amount}} (6 mjeseci) za bolju sigurnost."
     }
   }
 }

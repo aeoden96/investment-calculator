@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { iconifyIcon } from '../config';
 import type { ImportedSpendingData } from '../types';
@@ -15,6 +15,7 @@ interface RevolutImportProps {
 
 export function RevolutImport({ onApplyImport, onReset, hasImportedData }: RevolutImportProps) {
   const { t } = useTranslation();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [validation, setValidation] = useState<{ isValid: boolean; errors: string[]; warnings: string[] } | null>(null);
   const [analyzedData, setAnalyzedData] = useState<ImportedSpendingData | null>(null);
   const [csvText, setCsvText] = useState<string>('');
@@ -77,10 +78,13 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
     onReset();
     
     // Clear file input
-    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
-    if (fileInput) {
-      fileInput.value = '';
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
+  };
+  
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
   };
   
   return (
@@ -110,11 +114,20 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
             </label>
             <div className="flex flex-col gap-2">
               <input
+                ref={fileInputRef}
                 type="file"
                 accept=".csv"
                 onChange={handleFileChange}
-                className="file-input file-input-bordered file-input-primary w-full max-w-md"
+                className="hidden"
               />
+              <button
+                type="button"
+                onClick={handleButtonClick}
+                className="btn btn-primary w-full max-w-md"
+              >
+                <span dangerouslySetInnerHTML={{ __html: iconifyIcon('mdi:file-upload', '1.2em') }} />
+                {t('import.chooseFile')}
+              </button>
             </div>
           </div>
         )}
@@ -139,7 +152,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
                 {/* Category breakdown summary */}
                 <div className="mt-3 p-3 bg-base-100 rounded text-sm">
                   <div className="font-semibold mb-2">{t('import.categoryBreakdown')}:</div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {Object.entries(analyzedData.categoryBreakdown)
                       .sort((a, b) => b[1].total - a[1].total)
                       .slice(0, 6)

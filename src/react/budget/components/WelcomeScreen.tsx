@@ -156,7 +156,7 @@ export function WelcomeScreen({ onClose }: WelcomeScreenProps) {
       </button>
 
       {/* Content Container */}
-      <div className="w-full max-w-2xl mx-4">
+      <div className="w-full max-w-2xl mx-6 md:mx-4">
         <div
           ref={containerRef}
           className="card bg-base-100 shadow-2xl overflow-hidden select-none cursor-grab active:cursor-grabbing"

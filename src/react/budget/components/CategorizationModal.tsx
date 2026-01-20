@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Transaction } from '../types';
 import { expenseCategories } from '../config';
@@ -73,18 +73,37 @@ export function CategorizationModal({
   const categorizedCount = Object.values(selections).filter(cat => cat !== 'undecided').length;
   const allCategories = expenseCategories.map(cat => ({ id: cat.id, name: cat.name }));
   
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isOpen]);
+  
   if (!isOpen) return null;
   
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-      <div className="bg-base-100 rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] flex flex-col">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-0 md:p-4">
+      <div className="bg-base-100 rounded-none md:rounded-xl shadow-xl w-full h-full md:h-auto md:max-w-4xl md:max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="p-6 border-b border-base-300">
-          <h2 className="text-2xl font-bold mb-2">{t('categorization.title')}</h2>
-          <p className="text-sm opacity-70">
+        <div className="p-4 md:p-6 border-b border-base-300">
+          <h2 className="text-xl md:text-2xl font-bold mb-2">{t('categorization.title')}</h2>
+          <p className="text-xs md:text-sm opacity-70">
             {t('categorization.description')}
           </p>
-          <div className="mt-2 text-sm">
+          <div className="mt-2 text-xs md:text-sm">
             {t('categorization.merchantsCategorized', { 
               count: categorizedCount, 
               total: uniqueMerchants.length 
@@ -93,12 +112,12 @@ export function CategorizationModal({
         </div>
         
         {/* Scrollable list */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="space-y-3">
             {uniqueMerchants.map(({ merchant, totalAmount, count }) => (
               <div 
                 key={merchant} 
-                className="flex items-center gap-4 p-4 bg-base-200 rounded-lg hover:bg-base-300 transition-colors"
+                className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4 p-3 md:p-4 bg-base-200 rounded-lg"
               >
                 {/* Merchant info */}
                 <div className="flex-1 min-w-0">
@@ -117,7 +136,7 @@ export function CategorizationModal({
                 <select
                   value={selections[merchant] || 'undecided'}
                   onChange={(e) => handleCategoryChange(merchant, e.target.value)}
-                  className="select select-bordered select-sm w-64"
+                  className="select select-bordered select-sm w-full md:w-64"
                 >
                   <option value="undecided">{t('categorization.selectCategory')}</option>
                   <optgroup label={t('categorization.essential')}>
@@ -151,17 +170,17 @@ export function CategorizationModal({
         </div>
         
         {/* Footer */}
-        <div className="p-6 border-t border-base-300 flex justify-between items-center">
-          <div className="text-sm opacity-70">
+        <div className="p-4 md:p-6 border-t border-base-300 flex flex-col md:flex-row md:justify-between md:items-center gap-3">
+          <div className="text-xs md:text-sm opacity-70">
             {t('categorization.uncategorizedIgnored')}
           </div>
           <div className="flex gap-3">
-            <button onClick={onClose} className="btn btn-ghost">
+            <button onClick={onClose} className="btn btn-ghost flex-1 md:flex-none">
               {t('categorization.cancel')}
             </button>
             <button 
               onClick={handleApply} 
-              className="btn btn-primary"
+              className="btn btn-primary flex-1 md:flex-none"
               disabled={categorizedCount === 0}
             >
               {t('categorization.apply', { count: categorizedCount })}

@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import { iconifyIcon } from '../config';
 import type { CalculatedValues } from '../types';
 
@@ -8,6 +9,7 @@ interface AlertsProps {
 }
 
 export function Alerts({ calculated, totalExpenses }: AlertsProps) {
+  const { t } = useTranslation();
   const { surplus, savingsRate } = calculated;
   
   const alerts: ReactElement[] = [];
@@ -15,25 +17,25 @@ export function Alerts({ calculated, totalExpenses }: AlertsProps) {
   if (surplus <= 0) {
     alerts.push(
       <div key="critical" className="alert alert-error" dangerouslySetInnerHTML={{
-        __html: `<strong>${iconifyIcon('mdi:alert', '1em')} Critical:</strong> You're spending more than you earn! Reduce expenses immediately.`
+        __html: `<strong>${iconifyIcon('mdi:alert', '1em')} ${t('alerts.critical.title')}</strong> ${t('alerts.critical.message')}`
       }} />
     );
   } else if (savingsRate < 10) {
     alerts.push(
       <div key="low" className="alert alert-warning" dangerouslySetInnerHTML={{
-        __html: `<strong>${iconifyIcon('mdi:alert', '1em')} Low Savings Rate:</strong> Try to save at least 15% of your income. Consider reviewing discretionary expenses.`
+        __html: `<strong>${iconifyIcon('mdi:alert', '1em')} ${t('alerts.lowSavings.title')}</strong> ${t('alerts.lowSavings.message')}`
       }} />
     );
   } else if (savingsRate >= 30) {
     alerts.push(
       <div key="excellent" className="alert alert-success" dangerouslySetInnerHTML={{
-        __html: `<strong>${iconifyIcon('mdi:party-popper', '1em')} Excellent!</strong> You're saving over 30% - great job! This puts you on track for financial independence.`
+        __html: `<strong>${iconifyIcon('mdi:party-popper', '1em')} ${t('alerts.excellent.title')}</strong> ${t('alerts.excellent.message')}`
       }} />
     );
   } else if (savingsRate >= 15) {
     alerts.push(
       <div key="good" className="alert alert-success" dangerouslySetInnerHTML={{
-        __html: `<strong>${iconifyIcon('mdi:check-circle', '1em')} Good!</strong> You're on track with a healthy savings rate. Keep it up!`
+        __html: `<strong>${iconifyIcon('mdi:check-circle', '1em')} ${t('alerts.good.title')}</strong> ${t('alerts.good.message')}`
       }} />
     );
   }
@@ -47,13 +49,18 @@ export function Alerts({ calculated, totalExpenses }: AlertsProps) {
     if (currentBuffer < recommendedEmergencyFund) {
       alerts.push(
         <div key="emergency" className="alert alert-warning">
-          <strong>Emergency Fund:</strong> Build up to €{recommendedEmergencyFund.toLocaleString('en-US', { maximumFractionDigits: 0 })} (3 months expenses) before aggressive investing. Current buffer: €{currentBuffer.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+          <strong>{t('alerts.emergency.title')}</strong> {t('alerts.emergency.recommended', { 
+            amount: recommendedEmergencyFund.toLocaleString('en-US', { maximumFractionDigits: 0 }),
+            current: currentBuffer.toLocaleString('en-US', { maximumFractionDigits: 0 })
+          })}
         </div>
       );
     } else if (currentBuffer < idealEmergencyFund) {
       alerts.push(
         <div key="emergency-ideal" className="alert alert-info">
-          <strong>Emergency Fund:</strong> Good start! Consider building to €{idealEmergencyFund.toLocaleString('en-US', { maximumFractionDigits: 0 })} (6 months) for better security.
+          <strong>{t('alerts.emergency.title')}</strong> {t('alerts.emergency.ideal', { 
+            amount: idealEmergencyFund.toLocaleString('en-US', { maximumFractionDigits: 0 })
+          })}
         </div>
       );
     }

@@ -4,6 +4,7 @@
   "import": {
     "title": "Import Revolut Account Statement",
     "upload": "Upload your Revolut account statement CSV file",
+    "chooseFile": "Choose File",
     "reset": "Reset to Defaults",
     "validationFailed": "Validation Failed",
     "analysisSuccess": "File Analyzed Successfully",
@@ -60,7 +61,12 @@
     "totalInvested": "Total Invested",
     "estimatedValue": "Estimated Value",
     "profit": "Profit",
-    "recommendedRate": "Recommended: 15-20% • Ideal: 30%+ • Excellent: 50%+"
+    "recommendedRate": "Recommended: 15-20% • Ideal: 30%+ • Excellent: 50%+",
+    "savingsRateGuidelines": "Recommended: 15-20% • Ideal: 30%+ • Excellent: 50%+",
+    "toggleAriaLabel": "Toggle savings rate drawer",
+    "investmentSplitRecommended": "Recommended: 50-70% investment",
+    "projectionRates": "ETF @ 7%, BTC @ 15%, ETH @ 12%",
+    "splitInto": "split into"
   },
   "welcome": {
     "title": "Welcome to Budget Calculator!",
@@ -199,6 +205,29 @@
       "entertainment": "Cinema, events, dining out, travel • Budget for experiences",
       "cash": "ATM withdrawals and transfers • Track cash spending carefully",
       "default": "Adjust based on your spending habits"
+    }
+  },
+  "alerts": {
+    "critical": {
+      "title": "Critical:",
+      "message": "You're spending more than you earn! Reduce expenses immediately."
+    },
+    "lowSavings": {
+      "title": "Low Savings Rate:",
+      "message": "Try to save at least 15% of your income. Consider reviewing discretionary expenses."
+    },
+    "excellent": {
+      "title": "Excellent!",
+      "message": "You're saving over 30% - great job! This puts you on track for financial independence."
+    },
+    "good": {
+      "title": "Good!",
+      "message": "You're on track with a healthy savings rate. Keep it up!"
+    },
+    "emergency": {
+      "title": "Emergency Fund:",
+      "recommended": "Build up to €{{amount}} (3 months expenses) before aggressive investing. Current buffer: €{{current}}",
+      "ideal": "Good start! Consider building to €{{amount}} (6 months) for better security."
     }
   }
 }
