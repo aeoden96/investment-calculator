@@ -1,9 +1,27 @@
 import { useTranslation } from 'react-i18next';
+import { CheckCircle2, Target, Home, ShoppingCart, Car, Pill, UtensilsCrossed, Pizza, Smartphone, ShoppingBag, Gamepad2, BookOpen, PartyPopper, CreditCard, Lightbulb } from 'lucide-react';
 import { expenseCategories } from '../config';
 import type { ImportedSpendingData } from '../types';
 import { formatCategoryStats } from '../utils/statsFormatter';
 import { generateTip } from '../utils/tipGenerator';
 import { getTranslatedCategoryName } from '../utils/getTranslatedCategory';
+
+// Icon mappings for expense categories
+const categoryIcons: Record<string, typeof Home> = {
+  'rent': Home,
+  'groceries': ShoppingCart,
+  'utilities': Home,
+  'transport': Car,
+  'health': Pill,
+  'food-delivery': UtensilsCrossed,
+  'fast-food': Pizza,
+  'subscriptions': Smartphone,
+  'shopping': ShoppingBag,
+  'gaming': Gamepad2,
+  'books': BookOpen,
+  'entertainment': PartyPopper,
+  'cash': CreditCard
+};
 
 interface ExpenseCategoriesProps {
   expenses: Record<string, number>;
@@ -37,11 +55,15 @@ function CategoryCard({ cat, value, onExpenseChange, importedData, income }: Cat
   const dynamicTip = generateTip(cat.id, value, income, t, baseline);
   
   const translatedName = getTranslatedCategoryName(cat.id, t);
+  const IconComponent = categoryIcons[cat.id] || Home;
   
   return (
     <div className="bg-base-100 rounded-xl p-4 hover:shadow-md transition-shadow">
       <div className="flex justify-between items-center mb-2">
-        <span className="font-semibold text-lg" dangerouslySetInnerHTML={{ __html: translatedName }} />
+        <span className="font-semibold text-lg flex items-center gap-2">
+          <IconComponent className="w-5 h-5" />
+          {translatedName}
+        </span>
         <span className="text-xl font-bold">€{value}</span>
       </div>
       
@@ -75,7 +97,10 @@ function CategoryCard({ cat, value, onExpenseChange, importedData, income }: Cat
       
       {/* Dynamic Tip - only shown when spending is too high */}
       {dynamicTip && (
-        <div className="text-sm text-success mt-1" dangerouslySetInnerHTML={{ __html: dynamicTip }} />
+        <div className="text-sm text-success mt-1 flex items-center gap-1">
+          <Lightbulb className="w-4 h-4" />
+          {dynamicTip}
+        </div>
       )}
     </div>
   );
@@ -95,7 +120,7 @@ export function ExpenseCategories({ expenses, onExpenseChange, importedData, inc
       <div className="lg:p-4 md:p-2 p-1 lg:bg-success/5 rounded-xl space-y-4">
         <h3 className="text-lg font-bold text-success flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <span dangerouslySetInnerHTML={{ __html: '<iconify-icon icon="mdi:check-circle" style="font-size: 1.2em;"></iconify-icon>' }} />
+            <CheckCircle2 className="w-5 h-5" />
             <span>{t('categories.essentials')}</span>
           </span>
           <span className="text-sm font-normal text-success/80">€{essentialTotal.toLocaleString('en-US')}</span>
@@ -118,7 +143,7 @@ export function ExpenseCategories({ expenses, onExpenseChange, importedData, inc
       <div className="lg:p-4 md:p-2 p-1 lg:bg-warning/5 rounded-xl space-y-4">
         <h3 className="text-lg font-bold text-warning flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <span dangerouslySetInnerHTML={{ __html: '<iconify-icon icon="mdi:target" style="font-size: 1.2em;"></iconify-icon>' }} />
+            <Target className="w-5 h-5" />
             <span>{t('categories.discretionary')}</span>
           </span>
           <span className="text-sm font-normal text-warning/80">€{discretionaryTotal.toLocaleString('en-US')}</span>

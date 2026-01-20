@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
-import { iconifyIcon } from '../config';
+import { AlertCircle, PartyPopper, CheckCircle2 } from 'lucide-react';
 import type { CalculatedValues } from '../types';
 
 interface AlertsProps {
@@ -16,27 +16,27 @@ export function Alerts({ calculated, totalExpenses }: AlertsProps) {
   
   if (surplus <= 0) {
     alerts.push(
-      <div key="critical" className="alert alert-error" dangerouslySetInnerHTML={{
-        __html: `<strong>${iconifyIcon('mdi:alert', '1em')} ${t('alerts.critical.title')}</strong> ${t('alerts.critical.message')}`
-      }} />
+      <div key="critical" className="alert alert-error">
+        <strong><AlertCircle className="inline-block w-4 h-4 mr-1" /> {t('alerts.critical.title')}</strong> {t('alerts.critical.message')}
+      </div>
     );
   } else if (savingsRate < 10) {
     alerts.push(
-      <div key="low" className="alert alert-warning" dangerouslySetInnerHTML={{
-        __html: `<strong>${iconifyIcon('mdi:alert', '1em')} ${t('alerts.lowSavings.title')}</strong> ${t('alerts.lowSavings.message')}`
-      }} />
+      <div key="low" className="alert alert-warning">
+        <strong><AlertCircle className="inline-block w-4 h-4 mr-1" /> {t('alerts.lowSavings.title')}</strong> {t('alerts.lowSavings.message')}
+      </div>
     );
   } else if (savingsRate >= 30) {
     alerts.push(
-      <div key="excellent" className="alert alert-success" dangerouslySetInnerHTML={{
-        __html: `<strong>${iconifyIcon('mdi:party-popper', '1em')} ${t('alerts.excellent.title')}</strong> ${t('alerts.excellent.message')}`
-      }} />
+      <div key="excellent" className="alert alert-success">
+        <strong><PartyPopper className="inline-block w-4 h-4 mr-1" /> {t('alerts.excellent.title')}</strong> {t('alerts.excellent.message')}
+      </div>
     );
   } else if (savingsRate >= 15) {
     alerts.push(
-      <div key="good" className="alert alert-success" dangerouslySetInnerHTML={{
-        __html: `<strong>${iconifyIcon('mdi:check-circle', '1em')} ${t('alerts.good.title')}</strong> ${t('alerts.good.message')}`
-      }} />
+      <div key="good" className="alert alert-success">
+        <strong><CheckCircle2 className="inline-block w-4 h-4 mr-1" /> {t('alerts.good.title')}</strong> {t('alerts.good.message')}
+      </div>
     );
   }
   

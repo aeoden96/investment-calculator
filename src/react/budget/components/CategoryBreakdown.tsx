@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { iconifyIcon } from '../config';
+import { CheckCircle2, Target } from 'lucide-react';
 import type { CalculatedValues } from '../types';
 
 interface CategoryBreakdownProps {
@@ -20,19 +20,19 @@ export function CategoryBreakdown({ calculated, income }: CategoryBreakdownProps
     <div className="rounded-lg">
       <div className="grid grid-cols-2 gap-3">
         <div className="text-center py-3 md:p-3 md:bg-success/10 rounded-lg md:border-2 md:border-success/30">
-          <div 
-            className="text-xs text-success font-bold mb-1 uppercase tracking-wide flex items-center justify-center gap-1"
-            dangerouslySetInnerHTML={{ __html: `${iconifyIcon('mdi:check-circle', '1em')} ${t('categories.essentials')}` }}
-          />
+          <div className="text-xs text-success font-bold mb-1 uppercase tracking-wide flex items-center justify-center gap-1">
+            <CheckCircle2 className="w-4 h-4" />
+            {t('categories.essentials')}
+          </div>
           <div className="text-xl font-bold text-success mb-1">€{essentialTotal.toLocaleString('en-US')}</div>
           <div className="text-xs text-base-content/70">{essentialPercent}% {t('categories.ofExpenses')}</div>
           <div className="text-xs text-success/80 mt-1">{essentialPercentOfIncome}% {t('categories.ofIncome')}</div>
         </div>
         <div className="text-center py-3 md:p-3 md:bg-warning/10 rounded-lg md:border-2 md:border-warning/30">
-          <div 
-            className="text-xs text-warning font-bold mb-1 uppercase tracking-wide flex items-center justify-center gap-1"
-            dangerouslySetInnerHTML={{ __html: `${iconifyIcon('mdi:target', '1em')} ${t('categories.discretionary')}` }}
-          />
+          <div className="text-xs text-warning font-bold mb-1 uppercase tracking-wide flex items-center justify-center gap-1">
+            <Target className="w-4 h-4" />
+            {t('categories.discretionary')}
+          </div>
           <div className="text-xl font-bold text-warning mb-1">€{discretionaryTotal.toLocaleString('en-US')}</div>
           <div className="text-xs text-base-content/70">{discretionaryPercent}% {t('categories.ofExpenses')}</div>
           <div className="text-xs text-warning/80 mt-1">{discretionaryPercentOfIncome}% {t('categories.ofIncome')}</div>

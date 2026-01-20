@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { iconifyIcon } from '../config';
+import { RefreshCw, Upload, Tag, Check, Info } from 'lucide-react';
 import type { ImportedSpendingData } from '../types';
 import { validateRevolutCSV, analyzeCSV } from '../utils/csvAnalyzer';
 import { formatImportSummary } from '../utils/statsFormatter';
@@ -101,7 +101,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
               onClick={handleReset}
               className="btn btn-sm btn-error btn-outline"
             >
-              <span dangerouslySetInnerHTML={{ __html: iconifyIcon('mdi:refresh', '1.2em') }} />
+              <RefreshCw className="w-4 h-4" />
               {t('import.reset')}
             </button>
           )}
@@ -125,7 +125,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
                 onClick={handleButtonClick}
                 className="btn btn-primary w-full max-w-md"
               >
-                <span dangerouslySetInnerHTML={{ __html: iconifyIcon('mdi:file-upload', '1.2em') }} />
+                <Upload className="w-4 h-4" />
                 {t('import.chooseFile')}
               </button>
             </div>
@@ -177,7 +177,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
                           onClick={() => setIsModalOpen(true)}
                           className="btn btn-sm btn-warning"
                         >
-                          <span dangerouslySetInnerHTML={{ __html: iconifyIcon('mdi:tag-plus', '1.2em') }} />
+                          <Tag className="w-4 h-4" />
                           {t('import.categorizeManually')}
                         </button>
                       </div>
@@ -209,7 +209,7 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
                   onClick={handleApply}
                   className="btn btn-primary w-full mt-4"
                 >
-                  <span dangerouslySetInnerHTML={{ __html: iconifyIcon('mdi:check', '1.2em') }} />
+                  <Check className="w-4 h-4" />
                   {t('import.apply')}
                 </button>
               </div>
@@ -220,9 +220,9 @@ export function RevolutImport({ onApplyImport, onReset, hasImportedData }: Revol
         {/* Show applied data info */}
         {hasImportedData && analyzedData && (
           <div className="mt-4 p-4 rounded-lg border border-info bg-info/10">
-            <div className="font-bold text-info mb-2">
-              <span dangerouslySetInnerHTML={{ __html: iconifyIcon('mdi:information', '1.2em') }} />
-              {' '}{t('import.dataApplied')}
+            <div className="font-bold text-info mb-2 flex items-center gap-2">
+              <Info className="w-4 h-4" />
+              {t('import.dataApplied')}
             </div>
             <div className="text-sm">
               {t('import.usingData')} {fileName}

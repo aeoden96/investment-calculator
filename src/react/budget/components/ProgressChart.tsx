@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { Chart } from 'chart.js/auto';
+import { CheckCircle2 } from 'lucide-react';
 import type { ChartData } from '../types';
-import { iconifyIcon } from '../config';
 
 interface ProgressChartProps {
   chartData: ChartData;
@@ -127,9 +127,9 @@ export function ProgressChart({ chartData, bufferLimit }: ProgressChartProps) {
       {/* Buffer limit status */}
       <div className="mt-4">
         {chartData.bufferLimitReachedMonth >= 0 ? (
-          <div className="alert alert-success" dangerouslySetInnerHTML={{
-            __html: `<strong>${iconifyIcon('mdi:check-circle', '1em')} Buffer limit reached in ${chartData.labels[chartData.bufferLimitReachedMonth]}!</strong> Investment split switched to 100% investment from ${chartData.labels[chartData.bufferLimitReachedMonth]} onwards. Final buffer: €${chartData.finalBuffer.toLocaleString('en-US')}`
-          }} />
+          <div className="alert alert-success">
+            <strong><CheckCircle2 className="inline-block w-4 h-4 mr-1" /> Buffer limit reached in {chartData.labels[chartData.bufferLimitReachedMonth]}!</strong> Investment split switched to 100% investment from {chartData.labels[chartData.bufferLimitReachedMonth]} onwards. Final buffer: €{chartData.finalBuffer.toLocaleString('en-US')}
+          </div>
         ) : bufferLimit > 0 ? (
           <div className="alert alert-info">
             Buffer limit not reached in 12 months. Current buffer: €{chartData.finalBuffer.toLocaleString('en-US')} / €{bufferLimit.toLocaleString('en-US')}
