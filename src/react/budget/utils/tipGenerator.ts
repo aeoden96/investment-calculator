@@ -1,4 +1,4 @@
-import type { TFunction } from 'react-i18next';
+import type { TFunction } from "i18next";
 
 /**
  * Generates dynamic tips for categories when spending is too high

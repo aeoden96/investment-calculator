@@ -1,4 +1,4 @@
-import type { TFunction } from 'react-i18next';
+import type { TFunction } from "i18next";
 
 /**
  * Gets translated category name (without icon)
@@ -6,6 +6,7 @@ import type { TFunction } from 'react-i18next';
 export function getTranslatedCategoryName(
   categoryId: string,
   t: TFunction
+
 ): string {
   return t(`categoryNames.${categoryId}`, { defaultValue: categoryId });
 }
